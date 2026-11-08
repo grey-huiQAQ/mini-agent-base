@@ -1,0 +1,12 @@
+{
+  "since": "2026-09-12",
+  "note": "台账条数基线（P4-1f 债务棘轮）。任一条数与基线不符都会使 checks/check_debt_ratchet.py 退出码 1：条数增加 = 债务增长；条数减少 = 基线未收紧。两种情形都必须在同一次提交内更新本文件，使「烧减」在 diff 里可见（-N 才是证据）。写回方式：.\\.venv\\Scripts\\python.exe scripts\\snapshot_state.py --update-baseline，然后 git add 本文件。",
+  "ledgers": {
+    "duplicate_name": 15,
+    "comment_freshness": 0,
+    "dynamic_namespace": 1,
+    "test_db_isolation": 0,
+    "import_direction": 6,
+    "doc_integrity": 0
+  }
+}

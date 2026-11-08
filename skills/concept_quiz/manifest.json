@@ -1,0 +1,33 @@
+{
+  "name": "concept_quiz",
+  "display_name": "概念测验",
+  "description": "基于知识图谱节点或用户指定知识点，生成测验题，检验掌握程度",
+  "version": "1.0.0",
+  "author": "Personal Agent",
+  "tags": ["学习", "测验", "巩固"],
+  "input_schema": {
+    "concept": {
+      "type": "string",
+      "required": false,
+      "description": "要测验的知识点名称（可选，不提供则自动选取薄弱点）"
+    },
+    "difficulty": {
+      "type": "string",
+      "required": false,
+      "description": "难度: easy/medium/hard，默认 medium",
+      "default": "medium"
+    },
+    "num_questions": {
+      "type": "integer",
+      "required": false,
+      "description": "题目数量（1-5），默认 3",
+      "default": 3
+    }
+  },
+  "output_schema": {
+    "result": {
+      "type": "string",
+      "description": "生成的测验题和说明"
+    }
+  }
+}

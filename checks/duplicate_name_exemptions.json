@@ -1,0 +1,77 @@
+[
+  {
+    "name": "main",
+    "reason": "各独立脚本/工具的标准 CLI 入口名（index_documents.py、test_runtime.py、scripts/pre_commit_hook.py、core/test_runner.py）。main() 是 if __name__ == \"__main__\" 惯用法约定的名字，四份实现互不相关，不构成跨模块契约；改名只会违背惯用法。",
+    "since": "2026-09-06"
+  },
+  {
+    "name": "make_evidence",
+    "reason": "四个 UI 契约测试文件各自独立的「构造证据对象」辅助函数（资格过滤 / 深度搜索 / 相关性重算 / 资源机会）。被测对象与断言各不相同，合并会让互不相关的测试互相耦合。",
+    "since": "2026-09-06"
+  },
+  {
+    "name": "MockProvider",
+    "reason": "同 make_evidence 的四个文件各自独立的 mock 搜索源（可配置返回值 / 抛异常 / 延迟 / 并发计数）。测试替身本就该各文件独立，抽公共只会让一个测试的需求污染另一个。",
+    "since": "2026-09-06"
+  },
+  {
+    "name": "rag_search",
+    "reason": "工具入口与实现的同名委托：tools/local_tools.py 的 rag_search 是暴露给 LLM 的工具函数（名字必须与 TOOLS_DEFINITIONS 声明的工具名一致），内部委托 rag/retriever.py 的同名实现。同名是工具协议要求，不是复制。",
+    "since": "2026-09-06"
+  },
+  {
+    "name": "setup",
+    "reason": "nose/unittest 时代的测试模块初始化约定名，21 个文件各自建自己临时库的表结构（内容各不相同，无法合并）。注意其现状：pytest 8.0+ 已不再自动调用模块级 setup()，故本仓库统一用 runner 直跑（见 PROJECT_STATUS §七 pytest 兼容性更正）。",
+    "since": "2026-09-06"
+  },
+  {
+    "name": "SkillImpl",
+    "reason": "skills 接口契约：core/skill_manager.py 按类名反射加载 —— getattr(module, \"SkillImpl\")。四个技能包必须同名，去重会直接破坏技能加载器。",
+    "since": "2026-09-06"
+  },
+  {
+    "name": "teardown",
+    "reason": "同 setup：nose/unittest 时代的模块级清理约定名（test_information_engine.py、test_note_enhancements.py），各自清理自己的产物。",
+    "since": "2026-09-06"
+  },
+  {
+    "name": "test_cleanup",
+    "reason": "21 个测试文件末尾「清理测试产物」用例的约定名，各自清理自己创建的临时库与文件系统产物；名字统一是为了让 runner 的用例计数与人工排查有稳定锚点。",
+    "since": "2026-09-06"
+  },
+  {
+    "name": "test_independent_database_and_table",
+    "reason": "两个资源类测试（test_resource_scout / test_task_templates）各自验证「独立临时库 + 建表 + 幂等」，断言的表与列不同。",
+    "since": "2026-09-06"
+  },
+  {
+    "name": "test_parse_json_response",
+    "reason": "三个技能测试（concept_quiz / idea_incubator / study_plan_generator）各自验证自家技能对 LLM 输出的 JSON 解析，被测实现是三个不同的技能类。",
+    "since": "2026-09-06"
+  },
+  {
+    "name": "test_run_empty_context",
+    "reason": "同 test_parse_json_response：两个技能测试各自的空上下文路径用例。",
+    "since": "2026-09-06"
+  },
+  {
+    "name": "test_skill_load",
+    "reason": "同 test_parse_json_response：三个技能测试各自的技能加载用例（各自校验 manifest 字段与 SkillImpl 实例化）。",
+    "since": "2026-09-06"
+  },
+  {
+    "name": "test_ui_callback_contract",
+    "reason": "四个页面级 UI 契约测试（信息引擎 / 资源机会 / 任务执行 / 任务模板）各自的「回调返回值与 outputs 匹配」用例，被测回调不同。",
+    "since": "2026-09-06"
+  },
+  {
+    "name": "test_ui_callback_helpers_contract",
+    "reason": "同 test_ui_callback_contract：每日计划与提醒两个页面的辅助函数契约用例。",
+    "since": "2026-09-06"
+  },
+  {
+    "name": "test_validate_input",
+    "reason": "同 test_parse_json_response：三个技能测试各自的输入校验用例（各技能的校验规则不同）。",
+    "since": "2026-09-06"
+  }
+]

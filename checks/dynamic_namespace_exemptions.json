@@ -1,0 +1,7 @@
+[
+  {
+    "key": "business/model_client.py:267",
+    "reason": "stream_chat_with_tools 的 finally 资源埋点里的 locals().get(\"response_text\", \"\")：生成器可能在 create() 阶段就抛异常（此时 response_text 尚未赋值）或被调用方提前关闭，故用 locals() 做防御性取值，避免埋点自身抛 UnboundLocalError 影响主流程（埋点整体已包在 try/except 内，失败不影响对话）。改为无动态写法需把变量初始化前移到 try 之前，属触碰该函数重构时正面处理的项。",
+    "since": "2026-09-12"
+  }
+]

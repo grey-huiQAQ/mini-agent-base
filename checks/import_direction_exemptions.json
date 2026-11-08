@@ -1,0 +1,32 @@
+[
+  {
+    "key": "core/event_handlers.py:8",
+    "reason": "事件装配职责落在 core：assistant_message_completed 事件要触发学习评估，故 core 顶层导入 agents.evaluator。属 core 兼做装配层的历史结构，收拢装配点时应正面处理（把 wiring 移到 app/ 或独立的装配模块）。",
+    "since": "2026-09-12"
+  },
+  {
+    "key": "core/runtime.py:16",
+    "reason": "AgentRuntime 主流程需要 Supervisor 做角色路由决策（supervisor_decision），故 core 顶层导入 agents.supervisor。与 :17 同属 runtime 的装配职责，重构时一并处理。",
+    "since": "2026-09-12"
+  },
+  {
+    "key": "core/runtime.py:17",
+    "reason": "运行时需要按角色取系统提示词与工具白名单（get_prompt / get_role_tools），故 core 顶层导入 prompts.role_prompts。",
+    "since": "2026-09-12"
+  },
+  {
+    "key": "plugins/local_tools/tool_plugin.py:4",
+    "reason": "本地工具插件复用 agents 层的工具 schema 定义（TOOLS_DEFINITIONS），避免同一份 schema 写两遍——这是有意选择的「共用定义」而非意外倒置；若改为插件层自持 schema 则会重新引入重复公共名债务。",
+    "since": "2026-09-12"
+  },
+  {
+    "key": "business/model_client.py:220",
+    "reason": "函数内延迟导入 ToolManager（缩进 12，位于调用期而非模块导入期），用于打破 business ↔ agents 的循环依赖。属刻意为之的循环破解，触碰该处时应连同循环本身一起处理。",
+    "since": "2026-09-12"
+  },
+  {
+    "key": "ui/app_factory.py:34",
+    "reason": "create_app() 内延迟 import app as _app_module：Phase 3b 拆分骨架后 app.py 为 re-export 薄壳，UI 工厂需引用其回调；延迟导入用于规避模块级循环。这是「UI 与业务层进一步解耦」要处理的具体位置，故把 app 定为 L4 使其可见而非藏在同层缝里。",
+    "since": "2026-09-12"
+  }
+]

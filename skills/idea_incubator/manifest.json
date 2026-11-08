@@ -1,0 +1,27 @@
+{
+  "name": "idea_incubator",
+  "display_name": "想法孵化器",
+  "description": "与用户讨论天马行空的想法，通过提问和分析，将想法逐步完善为具体目标或可执行计划",
+  "version": "1.0.0",
+  "author": "Personal Agent",
+  "tags": ["创意", "目标", "规划"],
+  "input_schema": {
+    "idea": {
+      "type": "string",
+      "required": true,
+      "description": "用户的初始想法"
+    },
+    "mode": {
+      "type": "string",
+      "required": false,
+      "description": "输出模式: goal（转化为目标）或 plan（转化为目标+任务），默认 goal",
+      "default": "goal"
+    }
+  },
+  "output_schema": {
+    "result": {
+      "type": "string",
+      "description": "讨论结果或生成的目标/计划摘要"
+    }
+  }
+}

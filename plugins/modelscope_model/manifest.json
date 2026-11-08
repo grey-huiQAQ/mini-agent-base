@@ -1,0 +1,7 @@
+{
+  "name": "modelscope_model",
+  "version": "1.0.0",
+  "type": "model",
+  "entry_point": "model_plugin.ModelScopeModelPlugin",
+  "dependencies": []
+}

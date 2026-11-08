@@ -1,0 +1,33 @@
+{
+  "name": "study_plan_generator",
+  "display_name": "学习计划生成器",
+  "description": "根据当前目标、薄弱知识点、待办任务等信息，生成个性化的学习计划",
+  "version": "1.0.0",
+  "author": "Personal Agent",
+  "tags": ["学习", "计划", "规划"],
+  "input_schema": {
+    "goal_id": {
+      "type": "string",
+      "required": false,
+      "description": "目标 ID（可选，若提供则基于该目标生成）"
+    },
+    "days": {
+      "type": "integer",
+      "required": false,
+      "description": "计划天数（默认 7）",
+      "default": 7
+    },
+    "save_tasks": {
+      "type": "boolean",
+      "required": false,
+      "description": "是否将计划保存为目标任务（默认 false）",
+      "default": false
+    }
+  },
+  "output_schema": {
+    "result": {
+      "type": "string",
+      "description": "生成的计划文本或保存结果摘要"
+    }
+  }
+}

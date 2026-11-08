@@ -1,0 +1,27 @@
+{
+  "name": "concept_explainer",
+  "display_name": "概念讲解",
+  "description": "通过类比和实例，将复杂概念讲解为通俗易懂的语言",
+  "version": "1.0.0",
+  "author": "Personal Agent",
+  "tags": ["学习", "讲解", "教育"],
+  "input_schema": {
+    "concept": {
+      "type": "string",
+      "required": true,
+      "description": "需要讲解的概念名称"
+    },
+    "level": {
+      "type": "string",
+      "required": false,
+      "description": "目标受众水平: beginner/intermediate/advanced",
+      "default": "beginner"
+    }
+  },
+  "output_schema": {
+    "explanation": {
+      "type": "string",
+      "description": "讲解内容"
+    }
+  }
+}
